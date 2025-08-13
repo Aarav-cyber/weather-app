@@ -7,7 +7,10 @@ export default function Search({ onSearchChange }) {
 
   const handleChange = (newValue) => {
     setSearch(newValue);
-    if (onSearchChange) onSearchChange(newValue); // Only call if provided
+    console.log('Selected city data:', newValue); // Add this line
+    console.log('Label:', newValue.label);
+    console.log('Value:', newValue.value);
+    if (onSearchChange) onSearchChange(newValue);
   };
 
   // const handleChange = (newValue) => {
@@ -17,26 +20,30 @@ export default function Search({ onSearchChange }) {
 
 
   const loadOptions = async (inputValue) => {
+    if (!inputValue) return { options: [] };
+
     try {
-      const response = await fetch(`${Url}?namePrefix=${inputValue}`, Options)
+      const response = await fetch(`${Url}?namePrefix=${inputValue}`, Options);
 
       if (response.status === 429) {
         throw new Error('Too many requests. Please wait a moment and try again.');
       }
+
       const result = await response.json();
+      console.log('API response:', result);
+
       return {
-        options: Array.isArray(result.data)
-          ? result.data.map((city) => ({
-              label: `${city.name}, ${city.country}`,
-              value: city.id,
-            }))
-          : [],
+        options: result.data.map((city) => ({
+          label: `${city.name}, ${city.countryCode}`,
+          value: `${city.latitude} ${city.longitude}`,
+        }))
       };
     } catch (error) {
       console.error(error);
       return { options: [] };
     }
   };
+
 
   return (
     <AsyncPaginate
