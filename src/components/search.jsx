@@ -1,23 +1,42 @@
 import { AsyncPaginate } from "react-select-async-paginate";
 import { useState } from "react";
-import { Url, Options } from "./api.js";
+import { Url, Options, WeatherUrl, Weather_API_Key } from "./api.js";
 
 export default function Search({ onSearchChange }) {
   const [search, setSearch] = useState(null);
+  const [weatherData, setWeatherData] = useState(null);
+  const [forecastData, setForecastData] = useState(null);
 
   const handleChange = (newValue) => {
     setSearch(newValue);
-    console.log('Selected city data:', newValue); // Add this line
-    console.log('Label:', newValue.label);
-    console.log('Value:', newValue.value);
+    // console.log('Selected city data:', newValue); // Add this line
+    // console.log('Label:', newValue.label);
+    // console.log('Value:', newValue.value);
     if (onSearchChange) onSearchChange(newValue);
+    const [lat, lon] = newValue.value.split(" ");
+
+    const Current = fetch(
+      `${WeatherUrl}/weather?lat=${lat}&lon=${lon}&appid=${Weather_API_Key}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setWeatherData(data);
+        console.log("Current weather data:", data);
+      });
+    const Forcast = fetch(
+      `${WeatherUrl}/forecast?lat=${lat}&lon=${lon}&appid=${Weather_API_Key}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setForecastData(data);
+        console.log("Forecast data:", data);
+      });
   };
 
   // const handleChange = (newValue) => {
   //   setSearch(newValue);
   //   onSearchChange(newValue);
   // };
-
 
   const loadOptions = async (inputValue) => {
     if (!inputValue) return { options: [] };
@@ -26,24 +45,25 @@ export default function Search({ onSearchChange }) {
       const response = await fetch(`${Url}?namePrefix=${inputValue}`, Options);
 
       if (response.status === 429) {
-        throw new Error('Too many requests. Please wait a moment and try again.');
+        throw new Error(
+          "Too many requests. Please wait a moment and try again."
+        );
       }
 
       const result = await response.json();
-      console.log('API response:', result);
+      console.log("API response:", result);
 
       return {
         options: result.data.map((city) => ({
           label: `${city.name}, ${city.countryCode}`,
           value: `${city.latitude} ${city.longitude}`,
-        }))
+        })),
       };
     } catch (error) {
       console.error(error);
       return { options: [] };
     }
   };
-
 
   return (
     <AsyncPaginate

@@ -9,3 +9,5 @@ export const Options = {
 
 
 
+export const WeatherUrl = 'https://api.openweathermap.org/data/2.5';
+export const Weather_API_Key = '0ebc9cdff101ad185aed1a7d8232ffee';
