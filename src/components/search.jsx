@@ -1,3 +1,4 @@
+import WeatherBox from "./weather-box/weather-box.jsx";
 import { AsyncPaginate } from "react-select-async-paginate";
 import { useState } from "react";
 import { Url, Options, WeatherUrl, Weather_API_Key } from "./api.js";
@@ -8,23 +9,31 @@ export default function Search({ onSearchChange }) {
   const [forecastData, setForecastData] = useState(null);
 
   const handleChange = (newValue) => {
+    if (!newValue) {
+      setSearch(null);
+      setWeatherData(null);
+      setForecastData(null);
+      return;
+    }
+
     setSearch(newValue);
-    // console.log('Selected city data:', newValue); // Add this line
-    // console.log('Label:', newValue.label);
-    // console.log('Value:', newValue.value);
     if (onSearchChange) onSearchChange(newValue);
+
     const [lat, lon] = newValue.value.split(" ");
 
-    const Current = fetch(
-      `${WeatherUrl}/weather?lat=${lat}&lon=${lon}&appid=${Weather_API_Key}`
+    // Fetch current weather
+    fetch(
+      `${WeatherUrl}/weather?lat=${lat}&lon=${lon}&units=metric&appid=${Weather_API_Key}`
     )
       .then((response) => response.json())
       .then((data) => {
         setWeatherData(data);
         console.log("Current weather data:", data);
       });
-    const Forcast = fetch(
-      `${WeatherUrl}/forecast?lat=${lat}&lon=${lon}&appid=${Weather_API_Key}`
+
+    // Fetch forecast
+    fetch(
+      `${WeatherUrl}/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${Weather_API_Key}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -33,11 +42,6 @@ export default function Search({ onSearchChange }) {
       });
   };
 
-  // const handleChange = (newValue) => {
-  //   setSearch(newValue);
-  //   onSearchChange(newValue);
-  // };
-
   const loadOptions = async (inputValue) => {
     if (!inputValue) return { options: [] };
 
@@ -45,9 +49,7 @@ export default function Search({ onSearchChange }) {
       const response = await fetch(`${Url}?namePrefix=${inputValue}`, Options);
 
       if (response.status === 429) {
-        throw new Error(
-          "Too many requests. Please wait a moment and try again."
-        );
+        throw new Error("Too many requests. Please wait a moment and try again.");
       }
 
       const result = await response.json();
@@ -66,12 +68,15 @@ export default function Search({ onSearchChange }) {
   };
 
   return (
-    <AsyncPaginate
-      placeholder="Search for a city..."
-      debounceTimeout={600}
-      value={search}
-      onChange={handleChange}
-      loadOptions={loadOptions}
-    />
+    <>
+      <AsyncPaginate
+        placeholder="Search for a city..."
+        debounceTimeout={600}
+        value={search}
+        onChange={handleChange}
+        loadOptions={loadOptions}
+      />
+      <WeatherBox data={weatherData} forecast={forecastData} />
+    </>
   );
 }
