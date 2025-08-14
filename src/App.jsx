@@ -1,5 +1,6 @@
 import './App.css'
-import Search from'./components/search.jsx'
+import Search from './components/search.jsx'
+import WeatherBox from './components/weather-box/weather-box.jsx'
 function App() {
  
 
@@ -7,6 +8,7 @@ function App() {
     <>
       <div>
         <Search />
+        <WeatherBox/>
       </div>
     </>
   )

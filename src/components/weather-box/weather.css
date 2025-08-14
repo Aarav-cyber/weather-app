@@ -1,0 +1,74 @@
+.weather-box {
+  width: 300px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #72edf2 0%, #5151e5 100%);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  margin: 20px;
+}
+
+.weather-box .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.place-weather p:first-child {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.place-weather p:last-child {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.weather-img img {
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.bottom {
+  padding: 0 20px 20px;
+}
+
+.temperature p {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.details .left, .details .right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.details .left {
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+.details .right {
+  text-align: right;
+}
+
+.details p:first-child {
+  font-size: 18px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  opacity: 0.9;
+}
