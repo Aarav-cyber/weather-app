@@ -1,0 +1,244 @@
+/* Modern Search Component Styles */
+.search-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  animation: fadeIn 0.8s ease-out 0.4s both;
+}
+
+/* React Select Custom Styles */
+.search-container .css-13cymwt-control,
+.search-container .css-t3ipsp-control {
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 60px;
+  font-family: 'Inter', sans-serif;
+}
+
+.search-container .css-13cymwt-control:hover,
+.search-container .css-t3ipsp-control:hover {
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.search-container .css-t3ipsp-control {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Input styles */
+.search-container .css-1jqq78o-placeholder {
+  color: var(--text-tertiary);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.search-container .css-1dimb5e-singleValue {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.search-container .css-1u9des2-input {
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* Dropdown styles */
+.search-container .css-1nmdiq5-menu {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.search-container .css-1n6sfyn-MenuList {
+  max-height: 200px;
+  padding: 0.5rem 0;
+}
+
+/* Option styles */
+.search-container .css-tr4sx3-option {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.search-container .css-tr4sx3-option:hover {
+  background: var(--accent-primary);
+  color: white;
+  transform: translateX(4px);
+}
+
+.search-container .css-d7l1ni-option {
+  background: var(--accent-primary);
+  color: white;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+}
+
+/* Loading indicator */
+.search-container .css-1u9des2-input::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--accent-primary);
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Clear button */
+.search-container .css-1g6gooi {
+  color: var(--text-tertiary);
+  transition: all 0.2s ease;
+}
+
+.search-container .css-1g6gooi:hover {
+  color: var(--accent-primary);
+  transform: scale(1.1);
+}
+
+/* Dropdown indicator */
+.search-container .css-1xc3v61-indicatorContainer {
+  color: var(--text-tertiary);
+  transition: all 0.2s ease;
+}
+
+.search-container .css-1xc3v61-indicatorContainer:hover {
+  color: var(--accent-primary);
+}
+
+.search-container .css-t3ipsp-control .css-1xc3v61-indicatorContainer {
+  color: var(--accent-primary);
+}
+
+/* Focus states */
+.search-container .css-t3ipsp-control:focus-within {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Loading state */
+.search-container.loading .css-13cymwt-control,
+.search-container.loading .css-t3ipsp-control {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Error state */
+.search-container.error .css-13cymwt-control,
+.search-container.error .css-t3ipsp-control {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* Success state */
+.search-container.success .css-13cymwt-control,
+.search-container.success .css-t3ipsp-control {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-container {
+    max-width: 100%;
+  }
+  
+  .search-container .css-13cymwt-control,
+  .search-container .css-t3ipsp-control {
+    min-height: 56px;
+    border-radius: 12px;
+  }
+  
+  .search-container .css-1jqq78o-placeholder,
+  .search-container .css-1dimb5e-singleValue,
+  .search-container .css-1u9des2-input {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-container .css-13cymwt-control,
+  .search-container .css-t3ipsp-control {
+    min-height: 52px;
+    border-radius: 10px;
+  }
+  
+  .search-container .css-1jqq78o-placeholder,
+  .search-container .css-1dimb5e-singleValue,
+  .search-container .css-1u9des2-input {
+    font-size: 0.9rem;
+  }
+  
+  .search-container .css-tr4sx3-option,
+  .search-container .css-d7l1ni-option {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Dark mode specific adjustments */
+@media (prefers-color-scheme: dark) {
+  .search-container .css-1nmdiq5-menu {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+  }
+  
+  .search-container .css-tr4sx3-option {
+    background: var(--bg-tertiary);
+  }
+  
+  .search-container .css-tr4sx3-option:hover {
+    background: var(--accent-primary);
+  }
+}
+
+/* Animation for search results */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-container .css-1nmdiq5-menu {
+  animation: slideDown 0.2s ease-out;
+}
+
+/* Custom scrollbar for dropdown */
+.search-container .css-1n6sfyn-MenuList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-container .css-1n6sfyn-MenuList::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+}
+
+.search-container .css-1n6sfyn-MenuList::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 3px;
+}
+
+.search-container .css-1n6sfyn-MenuList::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}

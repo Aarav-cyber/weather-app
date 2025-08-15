@@ -6,7 +6,6 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from "react-accessible-accordion";
-import "react-accessible-accordion/dist/fancy-example.css";
 import "./forecast.css";
 
 const WEEK_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -17,15 +16,23 @@ const Forecast = ({ data }) => {
     WEEK_DAYS.slice(0, dayInAWeek)
   );
 
+  if (!data) {
+    return (
+      <div className="forecast-container empty">
+        <p>Select a city to view the forecast</p>
+      </div>
+    );
+  }
+
   return (
-    <>
-      <label className="title">Daily</label>
+    <div className="forecast-container">
+      <label className="title">Daily Forecast</label>
       <Accordion allowZeroExpanded>
         {data.list.slice(0, 7).map((item, idx) => (
           <AccordionItem key={idx}>
             <AccordionItemHeading>
               <AccordionItemButton>
-                <div className="daily-item">
+                <div className={`daily-item ${getWeatherClass(item.weather[0].main)}`}>
                   <img
                     src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
                     className="icon-small"
@@ -70,8 +77,31 @@ const Forecast = ({ data }) => {
           </AccordionItem>
         ))}
       </Accordion>
-    </>
+    </div>
   );
+};
+
+// Helper function to determine weather class
+const getWeatherClass = (weatherMain) => {
+  const weatherMap = {
+    'Clear': 'sunny',
+    'Clouds': 'cloudy',
+    'Rain': 'rainy',
+    'Drizzle': 'rainy',
+    'Thunderstorm': 'stormy',
+    'Snow': 'snowy',
+    'Mist': 'cloudy',
+    'Smoke': 'cloudy',
+    'Haze': 'cloudy',
+    'Dust': 'cloudy',
+    'Fog': 'cloudy',
+    'Sand': 'cloudy',
+    'Ash': 'cloudy',
+    'Squall': 'stormy',
+    'Tornado': 'stormy'
+  };
+
+  return weatherMap[weatherMain] || 'cloudy';
 };
 
 export default Forecast;
