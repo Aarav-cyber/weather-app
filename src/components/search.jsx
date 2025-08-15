@@ -1,7 +1,9 @@
-import WeatherBox from "./weather-box/weather-box.jsx";
 import { AsyncPaginate } from "react-select-async-paginate";
 import { useState } from "react";
-import { Url, Options, WeatherUrl, Weather_API_Key } from "./api.js";
+import { Url, Options, WeatherUrl, Weather_API_Key } from "./api.js"; 
+
+import WeatherBox from "./weather-box/weather-box.jsx";
+import Forecast from "./forecast/forecast.jsx"; 
 
 export default function Search({ onSearchChange }) {
   const [search, setSearch] = useState(null);
@@ -76,7 +78,8 @@ export default function Search({ onSearchChange }) {
         onChange={handleChange}
         loadOptions={loadOptions}
       />
-      <WeatherBox data={weatherData} forecast={forecastData} />
+      <WeatherBox data={weatherData}  />
+      <Forecast data={forecastData} />
     </>
   );
 }

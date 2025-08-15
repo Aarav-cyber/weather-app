@@ -1,6 +1,6 @@
 import "./weather.css";
 
-export default function WeatherBox({ data, forecast }) {
+export default function WeatherBox({ data }) {
   if (!data) {
     return <p style={{ textAlign: "center" }}>Search for a city to see weather data</p>;
   }
