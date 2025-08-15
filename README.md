@@ -350,15 +350,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Vite Team** for the fast build tool
 - **Inter Font** for beautiful typography
 
-## 📞 Support
 
-If you have any questions or need help with the project:
-
-- **Issues**: Create an issue on GitHub
-- **Email**: [your-email@example.com]
-- **Documentation**: Check the inline code comments
-
----
 
 **Built with ❤️ using React, Vite, and modern web technologies**
 
